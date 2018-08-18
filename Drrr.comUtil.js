@@ -18,7 +18,7 @@ window.addEventListener("load", function() {
 
     let body1 = document.getElementsByTagName('body')[0];
     let boxWrapper = document.getElementsByClassName("message_box_effect_wraper");
-    let wrappi = document.getElementsByClassName("room-submit-wrap");
+    let wrappi = document.getElementsByClassName("room-input-wrap");
     let scriptDiv = document.createElement("div");
     let scriptList = document.createElement("ul");
     let scriptBox1 = document.createElement("div");
@@ -28,7 +28,12 @@ window.addEventListener("load", function() {
 
     //Script Button
     let scriptButton = document.createElement("button");
+    let submitButton = document.getElementsByName("post");
 
+    //music panel and image panel
+
+    let musicPanel = document.getElementById("music_pannel");
+    let imagePanel = document.getElementById("image_panel");
 
     //Mute
     let muteHeader = document.createElement("label");
@@ -124,22 +129,27 @@ window.addEventListener("load", function() {
     scriptDiv.style.padding = "0px";
     scriptDiv.style.maxWidth = "1800px";
     scriptDiv.style.display = "none";
+    scriptDiv.style.marginTop = "15px"; 
     //Script List
     scriptList.padding = "0px";
     scriptList.margin = "0px";
     //Script Button
-    scriptButton.style = "position:relative; left:395px; top:-24px; transition: all 1s ease;";
+    scriptButton.style = "transition: all 1s ease;";
     scriptButton.height = "auto";
     scriptButton.textContent = "SCRIPT";
     scriptButton.style.font = "400 12px Arial";
     scriptButton.style.fontStyle = "normal";
     scriptButton.style.lineHeight = "1";
+    scriptButton.style.cssFloat = "right"; 
     scriptButton.style.fontFamily = "Arial";
     scriptButton.style.padding = "5px 18px";
     scriptButton.style.color = "#969696";
     scriptButton.style.backgroundColor = "#4d4d4d";
     scriptButton.style.border = "1px solid #6b6b6b";
     scriptButton.style.borderRadius = "12px";
+    scriptButton.style.marginRight = "-6px"; 
+    scriptButton.style.marginTop = "5px"; 
+    submitButton[0].style.marginLeft = "180px";
     //Box1 Blacklist
     scriptBox1.style.listStyle = "none";
     scriptBox1.style.cssFloat = "right";
@@ -727,6 +737,15 @@ URLInput.style.backgroundColor = "#39393e";
 URLInput.style.color = "#fff";
 URLSet.style.color = "#969696";
 URLSet.style.backgroundColor = "#4d4d4d";
+    }
+
+    //hide if music or image panel displays
+
+    if(musicPanel.style.display == "block" || imagePanel.style.display == "block"){
+        scriptButton.style.display = "none"; 
+    }
+    else{
+        scriptButton.style.display = "block"; 
     }
 
 }, 500);

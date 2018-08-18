@@ -572,7 +572,7 @@ window.addEventListener("load", function() {
 
 
     setInterval(function(){
-    if(body1.className != "game-room--night"){
+    if(body1.className != "game-room--night" && body1.className != "game-room--night modal-open"){
 scriptButton.height = "auto";
 scriptButton.style.padding = "5px 18px";
 scriptButton.style.color = "#777";

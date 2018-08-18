@@ -1,12 +1,12 @@
-﻿// ==UserScript==
-// @name Drrr.comUtil.js Beautified
+// ==UserScript==
+// @name Drrr.comUtil.js
 // @namespace https://github.com/ReiwuKleiwu
 // @version 0.0.1
 // @description Multiple utilities for Drrr.com
 // @author Exii aka ニック & Levi aka leeopold.
 // @homepageURL https://github.com/ReiwuKleiwu
-// @supportURL https://openuserjs.org/scripts/Reimu/Drrr.comUtil.js/issues
-// @icon https://i.imgur.com/0bsveAe.png
+// @supportURL https://github.com/DrrrUtil/Drrr.comUtil/issues
+// @icon https://i.imgur.com/TGrEyCg.png
 // @match https://*/room*
 // @match http://*/room*
 // @license GPL-3.0-only
@@ -752,7 +752,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
     /*li1.addEventListener("click", function() {
         let messageBox = document.getElementsByClassName("message_box_effect_wraper");
         let body = document.getElementById("body");
-
         if (bool == 0) {
             bool = 1;
         } else {
@@ -762,7 +761,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
             alert("Rainbow-mode: On");
         }
         console.log(bool);
-
         var myInter = setInterval(function() {
             console.log("FUNCTION!!")
             let messageBox = document.getElementsByClassName("message_box_effect_wraper");
@@ -778,16 +776,11 @@ URLSet.style.backgroundColor = "#4d4d4d";
                 messageBox[0].style.background = "#fbfbfb"
                 body.style.background = "#0a0a0a";
                 clearInterval(myInter);
-
             }
         }, 30);
-
         if (bool == 0) {
             alert("Rainbow-mode: Off");
         }
-
-
-
     }, false);*/
 
     //Set URL Button

@@ -25,6 +25,7 @@ window.addEventListener("load", function() {
     let scriptBox2 = document.createElement("div");
     let scriptBox3 = document.createElement("div");
     let scriptBox4 = document.createElement("div");
+    let scriptBox5 = document.createElement("div");
 
     //Script Button
     let scriptButton = document.createElement("button");
@@ -92,6 +93,21 @@ window.addEventListener("load", function() {
     let URLDiv2 = document.createElement("div");
     let URLDiv3 = document.createElement("div");
 
+    //moderating 
+    let modHeader = document.createElement("label");
+    let moddedUsers = document.createElement("label");
+    let modText = document.createElement("textarea");
+    let modAdd = document.createElement("button");
+    let modRemove = document.createElement("button");
+    let modName = document.createElement("label");
+    let modInput = document.createElement("input");
+    let modDiv = document.createElement("div");
+    let modDiv2 = document.createElement("div");
+    let modDiv3 = document.createElement("div");
+    let modDiv4 = document.createElement("div");
+    let modDiv5 = document.createElement("div");
+    let modOn = document.createElement("button");
+
     //Background Video
 
 
@@ -102,6 +118,7 @@ window.addEventListener("load", function() {
     let muted = [];
     let whited = [];
     let blacked = [];
+    let modded = []; 
     var bool = 0;
     var bool2 = 0;
     var bool3 = 0;
@@ -109,7 +126,7 @@ window.addEventListener("load", function() {
     var whiteInterval1 = 300;
     var whiteInterval2 = 5000;
     var URL;
-
+    let msgIDS = []; 
     //URL
     if(window.location.protocol == "https:"){
         URL = "https://drrr.com/room/?ajax=1&api=json";
@@ -129,7 +146,7 @@ window.addEventListener("load", function() {
     scriptDiv.style.padding = "0px";
     scriptDiv.style.maxWidth = "1800px";
     scriptDiv.style.display = "none";
-    scriptDiv.style.marginTop = "15px"; 
+    scriptDiv.style.marginTop = "15px";
     //Script List
     scriptList.padding = "0px";
     scriptList.margin = "0px";
@@ -140,15 +157,15 @@ window.addEventListener("load", function() {
     scriptButton.style.font = "400 12px Arial";
     scriptButton.style.fontStyle = "normal";
     scriptButton.style.lineHeight = "1";
-    scriptButton.style.cssFloat = "right"; 
+    scriptButton.style.cssFloat = "right";
     scriptButton.style.fontFamily = "Arial";
     scriptButton.style.padding = "5px 18px";
     scriptButton.style.color = "#969696";
     scriptButton.style.backgroundColor = "#4d4d4d";
     scriptButton.style.border = "1px solid #6b6b6b";
     scriptButton.style.borderRadius = "12px";
-    scriptButton.style.marginRight = "-6px"; 
-    scriptButton.style.marginTop = "5px"; 
+    scriptButton.style.marginRight = "-6px";
+    scriptButton.style.marginTop = "5px";
     submitButton[0].style.marginLeft = "180px";
     //Box1 Blacklist
     scriptBox1.style.listStyle = "none";
@@ -198,6 +215,18 @@ window.addEventListener("load", function() {
     scriptBox4.style.backgroundColor = "#39393e";
     scriptBox4.style.border = "1px solid #616165";
     scriptBox4.style.borderRadius = "12px";
+    //Box5 Command System Admins
+    scriptBox5.style.listStyle = "none";
+    scriptBox5.style.cssFloat = "right";
+    scriptBox5.style.width = "18%";
+    scriptBox5.style.height = "420px";
+    scriptBox5.style.marginTop = "0px";
+    scriptBox5.style.marginBottom = "0px";
+    scriptBox5.style.marginLeft = "10px";
+    scriptBox5.style.marginRight = "10px";
+    scriptBox5.style.backgroundColor = "#39393e";
+    scriptBox5.style.border = "1px solid #616165";
+    scriptBox5.style.borderRadius = "12px";
     /////////////////////////Blacklist///////////////////////////////
     //Blacklist Header
     blackHeader.type = "text";
@@ -516,6 +545,82 @@ window.addEventListener("load", function() {
     URLDiv3.style.width = "100%";
     URLDiv3.style.overflow = "hidden";
     URLDiv3.style.margin = "20px auto";
+    /////////////////////////Moderating System///////////////////////////////
+        //modlist Header
+        modHeader.type = "text";
+        modHeader.textContent = "Moderating System:";
+        modHeader.style.cssFloat = "left";
+        modHeader.style.marginTop = "4px";
+        modHeader.style.marginLeft = "10px";
+        modHeader.style.textDecoration = "none";
+        //modlist Label
+        modName.type = "text";
+        modName.textContent = "Tripcode:";
+        modName.style.font = "400 14px Arial";
+        modName.style.cssFloat = "left";
+        modName.style.marginLeft = "10px";
+        //modlist Header Div
+        modDiv.className = "container";
+        modDiv.style.width = "100%";
+        modDiv.style.overflow = "hidden";
+        modDiv.style.margin = "20px auto";
+        //modlist Input
+        modInput.style.width = "60%";
+        modInput.style.cssFloat = "right";
+        modInput.style.font = "400 14px Arial";
+        modInput.style.padding = "5px 0px";
+        modInput.style.backgroundColor = "#39393e";
+        modInput.style.border = "1px solid #6b6b6b";
+        modInput.style.borderRadius = "5px";
+        //modList Input Div
+        modDiv2.className = "container";
+        modDiv2.style.width = "100%";
+        modDiv2.style.overflow = "hidden";
+        modDiv2.style.margin = "20px auto";
+        //modlist Add/Remove Div
+        modDiv3.className = "container";
+        modDiv3.style.width = "100%";
+        modDiv3.style.overflow = "hidden";
+        modDiv3.style.margin = "20px auto";
+        //modlist modlisted Users Div
+        modDiv4.className = "container";
+        modDiv4.style.width = "100%";
+        modDiv4.style.overflow = "hidden";
+        modDiv4.style.margin = "20px auto";
+        //modlist Textarea Div
+        modDiv5.className = "container";
+        modDiv5.style.width = "100%";
+        modDiv5.style.overflow = "hidden";
+        modDiv5.style.margin = "-8px 0px 0px 14px";
+        //modlist Add
+        modAdd.style.cssFloat = "right";
+        modAdd.textContent = "ADD";
+        modAdd.style.padding = "5px 10px";
+        modAdd.style.font = "400 12px Arial";
+        modAdd.style.border = "1px solid #6b6b6b";
+        modAdd.style.borderRadius = "12px";
+        //modlist Remove
+        modRemove.style.cssFloat = "right";
+        modRemove.textContent = "REMOVE";
+        modRemove.style.padding = "5px 10px";
+        modRemove.style.font = "400 12px Arial";
+        modRemove.style.border = "1px solid #6b6b6b";
+        modRemove.style.borderRadius = "12px";
+        //modlisted Users Label
+        moddedUsers.type = "text";
+        moddedUsers.textContent = "Moderators:";
+        moddedUsers.style.cssFloat = "left";
+        moddedUsers.style.marginTop = "4px";
+        moddedUsers.style.marginLeft = "10px";
+        //modlist Textarea
+        modText.rows = "9";
+        modText.cols = "30";
+        modText.readOnly = "true";
+        modText.style.backgroundColor = "#39393e";
+        modText.style.border = "1px solid #6b6b6b";
+        modText.style.borderRadius = "5px";
+        modText.style.resize= "none";
+        modText.textContent = modded;
 
 
     wrappi[0].appendChild(scriptButton);
@@ -524,6 +629,7 @@ window.addEventListener("load", function() {
     scriptDiv.appendChild(scriptBox2);
     scriptDiv.appendChild(scriptBox3);
     scriptDiv.appendChild(scriptBox4);
+    scriptDiv.appendChild(scriptBox5);
     //Blacklist
     scriptBox1.appendChild(blackDiv);
     scriptBox1.appendChild(blackDiv2);
@@ -577,6 +683,19 @@ window.addEventListener("load", function() {
     URLDiv2.appendChild(URLInput);
     URLDiv2.appendChild(URLName);
     URLDiv3.appendChild(URLSet);
+    //Moderating System
+    scriptBox5.appendChild(modDiv);
+    scriptBox5.appendChild(modDiv2);
+    scriptBox5.appendChild(modDiv3);
+    scriptBox5.appendChild(modDiv4);
+    scriptBox5.appendChild(modDiv5);
+    modDiv.appendChild(modHeader);
+    modDiv2.appendChild(modInput);
+    modDiv2.appendChild(modName);
+    modDiv3.appendChild(modRemove);
+    modDiv3.appendChild(modAdd);
+    modDiv4.appendChild(moddedUsers);
+    modDiv5.appendChild(modText);
 
 
 
@@ -597,6 +716,8 @@ scriptBox3.style.backgroundColor = "#fbfbfb";
 scriptBox3.style.border = "1px solid #ccc";
 scriptBox4.style.backgroundColor = "#fbfbfb";
 scriptBox4.style.border = "1px solid #ccc";
+scriptBox5.style.backgroundColor = "#fbfbfb";
+scriptBox5.style.border = "1px solid #ccc";
 //Morning blacklist color
 blackHeader.style.color = "#0a0a0a";
 blackName.style.color = "#555";
@@ -611,7 +732,7 @@ blackRemove.style.backgroundColor = "#fcfccc";
 blackRemove.style.border = "1px solid #ccc";
 blackedUsers.style.color = "#777";
 blackOn.style.color = "#777";
-blackOn.style.backgroundColor = "#fcfccc";
+
 blackOn.style.border = "1px solid #ccc";
 blackText.style.backgroundColor = "#fff";
 blackText.style.color = "#777";
@@ -632,14 +753,14 @@ whiteaddRoom.style.color = "#777";
 whiteaddRoom.style.backgroundColor = "#fcfccc";
 whiteaddRoom.style.border = "1px solid #ccc";
 whiteRage.style.color = "#777";
-whiteRage.style.backgroundColor = "#fcfccc";
+
 whiteRage.style.border = "1px solid #ccc";
 whiteClear.style.color = "#777";
 whiteClear.style.backgroundColor = "#fcfccc";
 whiteClear.style.border = "1px solid #ccc";
 whitedUsers.style.color = "#777";
 whiteOn.style.color = "#777";
-whiteOn.style.backgroundColor = "#fcfccc";
+
 whiteOn.style.border = "1px solid #ccc";
 whiteText.style.backgroundColor = "#fff";
 whiteText.style.color = "#777";
@@ -658,7 +779,7 @@ muteRemove.style.backgroundColor = "#fcfccc";
 muteRemove.style.border = "1px solid #ccc";
 mutedUsers.style.color = "#777";
 muteOn.style.color = "#777";
-muteOn.style.backgroundColor = "#fcfccc";
+
 muteOn.style.border = "1px solid #ccc";
 muteText.style.backgroundColor = "#fff";
 muteText.style.color = "#777";
@@ -671,6 +792,25 @@ URLInput.style.border = "1px solid #ccc";
 URLSet.style.color = "#777";
 URLSet.style.backgroundColor = "#fcfccc";
 URLSet.style.border = "1px solid #ccc";
+//Morning moderating system
+modHeader.style.color = "#0a0a0a";
+modName.style.color = "#555";
+modInput.style.backgroundColor = "#fff";
+modInput.style.color = "#555";
+modInput.style.border = "1px solid #ccc";
+modAdd.style.color = "#777";
+modAdd.style.backgroundColor = "#fcfccc";
+modAdd.style.border = "1px solid #ccc";
+modRemove.style.color = "#777";
+modRemove.style.backgroundColor = "#fcfccc";
+modRemove.style.border = "1px solid #ccc";
+moddedUsers.style.color = "#777";
+modOn.style.color = "#777";
+
+modOn.style.border = "1px solid #ccc";
+modText.style.backgroundColor = "#fff";
+modText.style.color = "#777";
+modText.style.border = "1px solid #ccc";
     }
     else{
 scriptButton.height = "auto";
@@ -683,6 +823,7 @@ scriptBox1.style.backgroundColor = "#39393e";
 scriptBox2.style.backgroundColor = "#39393e";
 scriptBox3.style.backgroundColor = "#39393e";
 scriptBox4.style.backgroundColor = "#39393e";
+scriptBox5.style.backgroundColor = "#39393e";
 //Blacklist color
 blackHeader.style.color = "#aaa";
 blackName.style.color = "#969696";
@@ -694,7 +835,7 @@ blackRemove.style.color = "#969696";
 blackRemove.style.backgroundColor = "#4d4d4d";
 blackedUsers.style.color = "#969696";
 blackOn.style.color = "#969696";
-blackOn.style.backgroundColor = "#4d4d4d";
+
 blackText.style.color = "#969696";
 blackText.style.backgroundColor = "#39393e";
 //Whitelist color
@@ -709,12 +850,12 @@ whiteRemove.style.backgroundColor = "#4d4d4d";
 whiteaddRoom.style.color = "#969696";
 whiteaddRoom.style.backgroundColor = "#4d4d4d";
 whiteRage.style.color = "#969696";
-whiteRage.style.backgroundColor = "#4d4d4d";
+
 whiteClear.style.color = "#969696";
 whiteClear.style.backgroundColor = "#4d4d4d";
 whitedUsers.style.color = "#969696";
 whiteOn.style.color = "#969696";
-whiteOn.style.backgroundColor = "#4d4d4d";
+
 whiteText.style.color = "#969696";
 whiteText.style.backgroundColor = "#39393e";
 //Mute color
@@ -728,7 +869,7 @@ muteRemove.style.color = "#969696";
 muteRemove.style.backgroundColor = "#4d4d4d";
 mutedUsers.style.color = "#969696";
 muteOn.style.color = "#969696";
-muteOn.style.backgroundColor = "#4d4d4d";
+
 muteText.style.backgroundColor = "#39393e";
 muteText.style.color = "#969696";
 //Custom Background
@@ -737,15 +878,57 @@ URLInput.style.backgroundColor = "#39393e";
 URLInput.style.color = "#fff";
 URLSet.style.color = "#969696";
 URLSet.style.backgroundColor = "#4d4d4d";
-    }
+//Moderating System
+modHeader.style.color = "#aaa";
+modName.style.color = "#969696";
+modInput.style.backgroundColor = "#39393e";
+modInput.style.color = "#fff";
+modAdd.style.color = "#969696";
+modAdd.style.backgroundColor = "#4d4d4d";
+modRemove.style.color = "#969696";
+modRemove.style.backgroundColor = "#4d4d4d";
+moddedUsers.style.color = "#969696";
+modOn.style.color = "#969696";
 
+modText.style.color = "#969696";
+modText.style.backgroundColor = "#39393e";
+    }
+// Color indicators for the ON/OFF Buttons
+//blacklist
+if(bool2 == 1){
+    blackOn.style.backgroundColor = "#c5ffb4";
+}
+else{
+    blackOn.style.backgroundColor = "#ffb5b5";
+}
+//whitelist
+if(bool3 == 1){
+    whiteOn.style.backgroundColor = "#c5ffb4";
+}
+else{
+    whiteOn.style.backgroundColor = "#ffb5b5";
+}
+//mute
+if(bool4 == 1){
+    muteOn.style.backgroundColor = "#c5ffb4";
+}
+else{
+    muteOn.style.backgroundColor = "#ffb5b5";
+}
+//ragemode
+if(bool == 1){
+    whiteRage.style.backgroundColor = "#c5ffb4";
+}
+else{
+    whiteRage.style.backgroundColor = "#ffb5b5";
+}
     //hide if music or image panel displays
 
     if(musicPanel.style.display == "block" || imagePanel.style.display == "block"){
-        scriptButton.style.display = "none"; 
+        scriptButton.style.display = "none";
     }
     else{
-        scriptButton.style.display = "block"; 
+        scriptButton.style.display = "block";
     }
 
 }, 500);
@@ -916,18 +1099,38 @@ URLSet.style.backgroundColor = "#4d4d4d";
 
     whiteRage.addEventListener("click", function(){
     if(whiteInterval1 == 300 && whiteInterval2 == 5000){
-        alert("Ragemode: On");
+        bool =  1; 
         whiteInterval1 = 20;
         whiteInterval2 = 150;
     }
     else{
-        alert("Ragemode: Off");
+        bool = 0; 
         whiteInterval1 = 300;
         whiteInterval2 = 5000;
     }
 
     }, false);
-    /////////////////////////Blacklist, Whitelist, Mute Calculations///////////////////////////////////////
+    //ModAdd
+    modAdd.addEventListener("click", function(){
+        modded.push(modInput.value);
+        for (let x = 0; x < modded.length; x++) {
+            console.log(modded[x]);
+        }
+        modText.textContent = modded + "\n";
+    }, false);
+    //ModRemove
+    modRemove.addEventListener("click", function() {
+
+        for (var i = modded.length - 1; i >= 0; i--) {
+            if (modded[i] === modInput.value) {
+                modded.splice(i, 1);
+
+            }
+            modText.textContent = modded + "\n";
+        }
+    }, false);
+
+    /////////////////////////Blacklist, Whitelist, Mute, Moderating System Calculations///////////////////////////////////////
 
     //Blacklist
     blackOn.addEventListener("click", function() {
@@ -948,7 +1151,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
             bool2 = 0;
         }
         if (bool2 == 1) {
-            alert("Blacklist: On");
         }
         console.log(bool2);
 
@@ -1000,7 +1202,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
         }, 500); //Ajax Refresh interval
 
         if (bool2 === 0) {
-            alert("Blacklist: Off");
         }
     }, false);
 
@@ -1015,7 +1216,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
             bool3 = 0;
         }
         if (bool3 === 1) {
-            alert("Whitelist: On");
         }
         console.log(bool3);
 
@@ -1089,7 +1289,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
         }, whiteInterval2);
 
         if (bool3 === 0) {
-            alert("Whitelist: Off");
         }
 
     }, false);
@@ -1105,7 +1304,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
         console.log(bool4);
 
         if (bool4 === 1) {
-            alert("Mute: On");
         }
 
         var myInter5 = setInterval(function() {
@@ -1160,7 +1358,6 @@ URLSet.style.backgroundColor = "#4d4d4d";
             }, 1000);
         }, 1000);
         if (bool4 === 0) {
-            alert("Mute: Off");
         }
 
 
@@ -1247,6 +1444,218 @@ URLSet.style.backgroundColor = "#4d4d4d";
         }
 
     }, 300);
+}, 1000);
+
+
+// Moderating System (kick)
+setInterval(function(){
+
+    var xmlhttp = new XMLHttpRequest(),
+        json;
+
+
+    var substring1 = "!kick";
+    var substring2 = "!ban";
+    var substring3 = "!givehost";
+    var substring4 = "!roomtitle";
+    var substring5 = "!roomdesc";
+    var substring6 = "!DJmode"; 
+   
+
+
+
+
+
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            json = JSON.parse(xmlhttp.responseText);
+            
+        }
+    };
+
+    xmlhttp.open('GET', URL, true);
+    xmlhttp.send();
+
+    let msgID = ""; 
+    let msg;  
+    let kick = "!kick"; 
+    let ban = "!ban"; 
+    let host = "!givehost"
+    let roomtitle = "!roomtitle";
+    let rooomdesc = "!roomdesc"; 
+    let DJmode = "!DJmode"; 
+
+    let id; 
+    
+
+    setTimeout(function(){
+
+        
+    for (let i = 0; i < json.room.talks.length; i++) {
+
+        msgID = json.room.talks[i].id; 
+       
+
+        if (json.room.talks[i].type == "message") {
+
+            var arraycontain = (modded.indexOf(json.room.talks[i].from.tripcode) > -1);
+            var arraycontain2 = (msgIDS.indexOf(msgID) > -1);
+       
+
+            if(arraycontain ==  true && arraycontain2 == false){
+                msg = json.room.talks[i].message
+                msgIDS.push(msgID);
+                
+                
+
+                
+
+                if(msg.includes(substring1)){
+                  
+
+                   let name = String(msg.slice(msg.indexOf(kick) + kick.length));
+                   for(let g = 0; g < json.room.users.length; g++){
+                       let meh = String(json.room.users[g].name); 
+                       name = name.replace(/\s/g, '');
+                        
+
+    
+                    if(name === meh){
+
+                        id = json.room.users[g].id; 
+
+                        const data = 'kick=' + id;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: URL,
+                            data: data
+                        });
+
+                        
+
+                    }
+                   }
+
+                }
+                else if(msg.includes(substring2)){
+
+                    let name = String(msg.slice(msg.indexOf(ban) + ban.length));
+                   for(let g = 0; g < json.room.users.length; g++){
+                       let meh = String(json.room.users[g].name); 
+                       name = name.replace(/\s/g, '');
+                        
+
+    
+                    if(name === meh){
+
+                        id = json.room.users[g].id; 
+
+                        const data = 'report_and_ban_user=' + id;
+
+                        $.ajax({
+                            type: 'POST',
+                            url: URL,
+                            data: data
+                        });
+
+                        
+
+                    }
+                   }
+                }
+                else if(msg.includes(substring3)){
+                    let name = String(msg.slice(msg.indexOf(host) + host.length));
+                    for(let g = 0; g < json.room.users.length; g++){
+                        let meh = String(json.room.users[g].name); 
+                        name = name.replace(/\s/g, '');
+                         
+ 
+     
+                     if(name === meh){
+ 
+                         id = json.room.users[g].id; 
+ 
+                         const data = 'new_host=' + id;
+ 
+                         $.ajax({
+                             type: 'POST',
+                             url: URL,
+                             data: data
+                         });
+ 
+                         
+ 
+                     }
+                    }
+                }
+                else if(msg.includes(substring4)){
+                    let name = String(msg.slice(msg.indexOf(roomtitle) + roomtitle.length));
+                    
+                        
+                    
+ 
+                
+                         const data = 'room_name=' + name;
+ 
+                         $.ajax({
+                             type: 'POST',
+                             url: URL,
+                             data: data
+                         });
+
+                    
+                }
+
+                else if(msg.includes(substring5)){
+
+                    let name = String(msg.slice(msg.indexOf(rooomdesc) + rooomdesc.length));
+
+                    const data = 'room_description=' + name;
+ 
+                         $.ajax({
+                             type: 'POST',
+                             url: URL,
+                             data: data
+                         });
+                }
+                else if(msg.includes(substring6)){
+                    let name = String(msg.slice(msg.indexOf(DJmode) + DJmode.length));
+                    let hue; 
+                    name = name.replace(/\s/g, '');
+                    if(name == "ON" || name == "on"){
+                        hue = "true"; 
+                    }
+                    else if(name == "OFF" || name == "off"){
+                        hue = "false"; 
+                    }
+
+                    const data = 'dj_mode=' + hue;
+ 
+                         $.ajax({
+                             type: 'POST',
+                             url: URL,
+                             data: data
+                         });
+                }
+
+                
+
+            }
+
+            
+
+
+        } else if (json.room.talks[i].type == "join" || json.room.talks[i].type == "leave") {
+
+
+
+        }
+
+    }
+
+}, 500);
 }, 1000);
 
 

@@ -1094,11 +1094,18 @@ else{
 
     }, false);
     //White Clearlist
-
+    
     whiteClear.addEventListener("click", function(){
+        if(bool3 == 0){
         whited = [];
         whiteText.textContent = whited + "\n";
+        }
+        else{
+            alert("You can't clear the list while the whitelist is running. Please turn it OFF first!")
+        } 
     }, false);
+    
+    
     //Whitelist RAGEMODE
 
     whiteRage.addEventListener("click", function(){
@@ -1232,14 +1239,14 @@ else{
         whited.push(json.user.name);
         whiteText.textContent = whited + "\n";
     }, 500);
+    
 
     //Whitelist
 
     whiteOn.addEventListener("click", function() {
 
 
-
-
+       
 
         if(whited.length > 1 || bool3 == 1){
 
@@ -1270,7 +1277,7 @@ else{
             xmlhttp.send();
 
 
-
+            
 
 
 

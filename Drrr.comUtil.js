@@ -93,7 +93,7 @@ window.addEventListener("load", function() {
     let URLDiv2 = document.createElement("div");
     let URLDiv3 = document.createElement("div");
 
-    //moderating 
+    //moderating
     let modHeader = document.createElement("label");
     let moddedUsers = document.createElement("label");
     let modText = document.createElement("textarea");
@@ -118,7 +118,7 @@ window.addEventListener("load", function() {
     let muted = [];
     let whited = [];
     let blacked = [];
-    let modded = []; 
+    let modded = [];
     var bool = 0;
     var bool2 = 0;
     var bool3 = 0;
@@ -126,7 +126,7 @@ window.addEventListener("load", function() {
     var whiteInterval1 = 300;
     var whiteInterval2 = 5000;
     var URL;
-    let msgIDS = []; 
+    let msgIDS = [];
     //URL
     if(window.location.protocol == "https:"){
         URL = "https://drrr.com/room/?ajax=1&api=json";
@@ -134,8 +134,6 @@ window.addEventListener("load", function() {
     {
         URL = "http://drrr.com/room/?ajax=1&api=json";
     }
-
-
 
 
     //Script Container/Wrapper
@@ -949,7 +947,6 @@ else{
     }, false);
 
 
-
     //Rainbow-mode Button function
     /*li1.addEventListener("click", function() {
         let messageBox = document.getElementsByClassName("message_box_effect_wraper");
@@ -1082,7 +1079,14 @@ else{
 
     setTimeout(function(){
     for (var x = 0; x < json.room.total; x++) {
+
+        var arraycontain = (whited.indexOf(json.room.users[x].name) > -1);
+
+        if(arraycontain == false){
+
         whited.push(json.room.users[x].name);
+
+        }
 
     }
     whiteText.textContent = whited + "\n";
@@ -1098,17 +1102,23 @@ else{
     //Whitelist RAGEMODE
 
     whiteRage.addEventListener("click", function(){
+    if(bool3 == 0){
+
     if(whiteInterval1 == 300 && whiteInterval2 == 5000){
-        bool =  1; 
+        bool =  1;
         whiteInterval1 = 20;
         whiteInterval2 = 150;
     }
     else{
-        bool = 0; 
+        bool = 0;
         whiteInterval1 = 300;
         whiteInterval2 = 5000;
     }
 
+    }
+    else{
+        alert("You can't enable Ragemode while the whitelist is running, turn it OFF first!")
+    }
     }, false);
     //ModAdd
     modAdd.addEventListener("click", function(){
@@ -1205,10 +1215,33 @@ else{
         }
     }, false);
 
+    //Whitelist add own username
+
+    var xmlhttp = new XMLHttpRequest(),
+    json;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            json = JSON.parse(xmlhttp.responseText);
+
+        }
+    };
+
+    xmlhttp.open('GET', URL, true);
+    xmlhttp.send()
+    setTimeout(function(){
+        whited.push(json.user.name);
+        whiteText.textContent = whited + "\n";
+    }, 500);
+
     //Whitelist
 
     whiteOn.addEventListener("click", function() {
 
+
+
+
+
+        if(whited.length > 1 || bool3 == 1){
 
         if (bool3 === 0) {
             bool3 = 1;
@@ -1235,6 +1268,8 @@ else{
         var myInter5 = setInterval(function() {
             xmlhttp.open('GET', URL , true);
             xmlhttp.send();
+
+
 
 
 
@@ -1291,6 +1326,11 @@ else{
         if (bool3 === 0) {
         }
 
+
+        }
+          else{
+            alert("Your whitelist is empty! Make sure to add other users AND YOUR OWN USERNAME to the whitelist as well!")
+          }
     }, false);
 
     //Mute lagless
@@ -1447,7 +1487,7 @@ else{
 }, 1000);
 
 
-// Moderating System (kick)
+// Moderating System
 setInterval(function(){
 
     var xmlhttp = new XMLHttpRequest(),
@@ -1459,8 +1499,8 @@ setInterval(function(){
     var substring3 = "!givehost";
     var substring4 = "!roomtitle";
     var substring5 = "!roomdesc";
-    var substring6 = "!DJmode"; 
-   
+    var substring6 = "!DJmode";
+
 
 
 
@@ -1470,60 +1510,60 @@ setInterval(function(){
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             json = JSON.parse(xmlhttp.responseText);
-            
+
         }
     };
 
     xmlhttp.open('GET', URL, true);
     xmlhttp.send();
 
-    let msgID = ""; 
-    let msg;  
-    let kick = "!kick"; 
-    let ban = "!ban"; 
+    let msgID = "";
+    let msg;
+    let kick = "!kick";
+    let ban = "!ban";
     let host = "!givehost"
     let roomtitle = "!roomtitle";
-    let rooomdesc = "!roomdesc"; 
-    let DJmode = "!DJmode"; 
+    let rooomdesc = "!roomdesc";
+    let DJmode = "!DJmode";
 
-    let id; 
-    
+    let id;
+
 
     setTimeout(function(){
 
-        
+
     for (let i = 0; i < json.room.talks.length; i++) {
 
-        msgID = json.room.talks[i].id; 
-       
+        msgID = json.room.talks[i].id;
+
 
         if (json.room.talks[i].type == "message") {
 
             var arraycontain = (modded.indexOf(json.room.talks[i].from.tripcode) > -1);
             var arraycontain2 = (msgIDS.indexOf(msgID) > -1);
-       
+
 
             if(arraycontain ==  true && arraycontain2 == false){
                 msg = json.room.talks[i].message
                 msgIDS.push(msgID);
-                
-                
 
-                
+
+
+
 
                 if(msg.includes(substring1)){
-                  
+
 
                    let name = String(msg.slice(msg.indexOf(kick) + kick.length));
                    for(let g = 0; g < json.room.users.length; g++){
-                       let meh = String(json.room.users[g].name); 
+                       let meh = String(json.room.users[g].name);
                        name = name.replace(/\s/g, '');
-                        
 
-    
+
+
                     if(name === meh){
 
-                        id = json.room.users[g].id; 
+                        id = json.room.users[g].id;
 
                         const data = 'kick=' + id;
 
@@ -1533,7 +1573,7 @@ setInterval(function(){
                             data: data
                         });
 
-                        
+
 
                     }
                    }
@@ -1543,14 +1583,14 @@ setInterval(function(){
 
                     let name = String(msg.slice(msg.indexOf(ban) + ban.length));
                    for(let g = 0; g < json.room.users.length; g++){
-                       let meh = String(json.room.users[g].name); 
+                       let meh = String(json.room.users[g].name);
                        name = name.replace(/\s/g, '');
-                        
 
-    
+
+
                     if(name === meh){
 
-                        id = json.room.users[g].id; 
+                        id = json.room.users[g].id;
 
                         const data = 'report_and_ban_user=' + id;
 
@@ -1560,7 +1600,7 @@ setInterval(function(){
                             data: data
                         });
 
-                        
+
 
                     }
                    }
@@ -1568,44 +1608,44 @@ setInterval(function(){
                 else if(msg.includes(substring3)){
                     let name = String(msg.slice(msg.indexOf(host) + host.length));
                     for(let g = 0; g < json.room.users.length; g++){
-                        let meh = String(json.room.users[g].name); 
+                        let meh = String(json.room.users[g].name);
                         name = name.replace(/\s/g, '');
-                         
- 
-     
+
+
+
                      if(name === meh){
- 
-                         id = json.room.users[g].id; 
- 
+
+                         id = json.room.users[g].id;
+
                          const data = 'new_host=' + id;
- 
-                         $.ajax({
-                             type: 'POST',
-                             url: URL,
-                             data: data
-                         });
- 
-                         
- 
-                     }
-                    }
-                }
-                else if(msg.includes(substring4)){
-                    let name = String(msg.slice(msg.indexOf(roomtitle) + roomtitle.length));
-                    
-                        
-                    
- 
-                
-                         const data = 'room_name=' + name;
- 
+
                          $.ajax({
                              type: 'POST',
                              url: URL,
                              data: data
                          });
 
-                    
+
+
+                     }
+                    }
+                }
+                else if(msg.includes(substring4)){
+                    let name = String(msg.slice(msg.indexOf(roomtitle) + roomtitle.length));
+
+
+
+
+
+                         const data = 'room_name=' + name;
+
+                         $.ajax({
+                             type: 'POST',
+                             url: URL,
+                             data: data
+                         });
+
+
                 }
 
                 else if(msg.includes(substring5)){
@@ -1613,7 +1653,7 @@ setInterval(function(){
                     let name = String(msg.slice(msg.indexOf(rooomdesc) + rooomdesc.length));
 
                     const data = 'room_description=' + name;
- 
+
                          $.ajax({
                              type: 'POST',
                              url: URL,
@@ -1622,17 +1662,17 @@ setInterval(function(){
                 }
                 else if(msg.includes(substring6)){
                     let name = String(msg.slice(msg.indexOf(DJmode) + DJmode.length));
-                    let hue; 
+                    let hue;
                     name = name.replace(/\s/g, '');
                     if(name == "ON" || name == "on"){
-                        hue = "true"; 
+                        hue = "true";
                     }
                     else if(name == "OFF" || name == "off"){
-                        hue = "false"; 
+                        hue = "false";
                     }
 
                     const data = 'dj_mode=' + hue;
- 
+
                          $.ajax({
                              type: 'POST',
                              url: URL,
@@ -1640,11 +1680,11 @@ setInterval(function(){
                          });
                 }
 
-                
+
 
             }
 
-            
+
 
 
         } else if (json.room.talks[i].type == "join" || json.room.talks[i].type == "leave") {

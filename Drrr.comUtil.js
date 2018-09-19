@@ -127,6 +127,7 @@ window.addEventListener("load", function() {
     var whiteInterval2 = 5000;
     var URL;
     let msgIDS = [];
+    let whiteBanIDS = []; 
     //URL
     if(window.location.protocol == "https:"){
         URL = "https://drrr.com/room/?ajax=1&api=json";
@@ -1265,7 +1266,7 @@ else{
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                console.log('Working.');
+
                 json = JSON.parse(xmlhttp.responseText);
                 console.log(json);
             }
@@ -1298,7 +1299,8 @@ else{
 
                 for (let b = 0; b < user.length; b++) {
                     var arraycontain = (whited.indexOf(user[b]) > -1);
-                    if (arraycontain == true) {
+                    var arraycontainB = (whiteBanIDS.indexOf(user[b]) > - 1); 
+                    if (arraycontain == true && arraycontainB == false && bool3 == 1) {
                         console.log("ArrayContain equals: " + arraycontain + " || This user was found in whitelist: " + user[b]);
                         console.log("UserID: " + userID[b]);
 
@@ -1308,11 +1310,15 @@ else{
 
                         const data = 'report_and_ban_user=' + userID[b];
 
+                        whiteBanIDS.push(userID[b]); 
+
                         $.ajax({
                             type: 'POST',
                             url: URL,
                             data: data
                         });
+
+                       
 
 
                     }

@@ -121,13 +121,13 @@ window.addEventListener("load", function() {
     let modded = [];
     var bool = 0;
     var bool2 = 0;
-    var bool3 = 0;
+    var bool3 = false;
     var bool4 = 0;
     var whiteInterval1 = 300;
-    var whiteInterval2 = 5000;
+    var whiteInterval2 = 1000;
     var URL;
     let msgIDS = [];
-    let whiteBanIDS = []; 
+    let whiteBanIDS = [];
     //URL
     if(window.location.protocol == "https:"){
         URL = "https://drrr.com/room/?ajax=1&api=json";
@@ -1095,7 +1095,7 @@ else{
 
     }, false);
     //White Clearlist
-    
+
     whiteClear.addEventListener("click", function(){
         if(bool3 == 0){
         whited = [];
@@ -1103,24 +1103,24 @@ else{
         }
         else{
             alert("You can't clear the list while the whitelist is running. Please turn it OFF first!")
-        } 
+        }
     }, false);
-    
-    
+
+
     //Whitelist RAGEMODE
 
     whiteRage.addEventListener("click", function(){
     if(bool3 == 0){
 
-    if(whiteInterval1 == 300 && whiteInterval2 == 5000){
+    if(whiteInterval1 == 300 && whiteInterval2 == 1000){
         bool =  1;
-        whiteInterval1 = 20;
-        whiteInterval2 = 150;
+        whiteInterval1 = 300;
+        whiteInterval2 = 300;
     }
     else{
         bool = 0;
         whiteInterval1 = 300;
-        whiteInterval2 = 5000;
+        whiteInterval2 = 1000;
     }
 
     }
@@ -1240,67 +1240,67 @@ else{
         whited.push(json.user.name);
         whiteText.textContent = whited + "\n";
     }, 500);
-    
+
 
     //Whitelist
 
     whiteOn.addEventListener("click", function() {
 
 
-       
+        var user = [];
+    var userID = [];
 
-        if(whited.length > 1 || bool3 == 1){
+        if(whited.length > 1 || bool3 == true){
 
-        if (bool3 === 0) {
-            bool3 = 1;
+        if (bool3 === false) {
+            bool3 = true;
         } else {
-            bool3 = 0;
+            bool3 = false;
         }
-        if (bool3 === 1) {
-        }
-        console.log(bool3);
 
-        console.log("Whitelist.")
-        var xmlhttp = new XMLHttpRequest(),
-            json;
+        ///////////////////////////////////
+       var whiteInterval= setInterval(function(){
 
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            var xmlhttp = new XMLHttpRequest(),json;
 
-                json = JSON.parse(xmlhttp.responseText);
-                console.log(json);
-            }
-        };
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                        json = JSON.parse(xmlhttp.responseText);
+                        console.log(json);
+                    }
+                };
 
-
-        var myInter5 = setInterval(function() {
-            xmlhttp.open('GET', URL , true);
-            xmlhttp.send();
-
-
-            
+                xmlhttp.open('GET', 'https://drrr.com/room/?ajax=1&api=json', true);
+                xmlhttp.send();
 
 
 
-            setTimeout(function() {
-                var user = [];
-                var userID = [];
+            setTimeout(function(){
 
-                for (var x = 0; x < json.room.total; x++) {
+
+              if(bool3 == true){
+
+
+
+
+                for (var x = 0; x < json.room.total; x++)
+                 {
+                    var arraycontainsturtles = (user.indexOf(json.room.users[x].name) > -1);
+
+                    if(arraycontainsturtles == false){
                     userID.push(json.room.users[x].id);
                     user.push(json.room.users[x].name);
+                    }
                 }
 
-                for (var y = 0; y < user.length; y++) {
-                    console.log("User Number " + (y + 1) + " : " + user[y]);
-                    console.log("User ID Number " + (y + 1) + " : " + userID[y]);
+                for(var b = 0; b < user.length; b++){
+                    console.log(user[b]);
                 }
-
 
                 for (let b = 0; b < user.length; b++) {
+
                     var arraycontain = (whited.indexOf(user[b]) > -1);
-                    var arraycontainB = (whiteBanIDS.indexOf(user[b]) > - 1); 
-                    if (arraycontain == true && arraycontainB == false && bool3 == 1) {
+                    if (arraycontain == true) {
                         console.log("ArrayContain equals: " + arraycontain + " || This user was found in whitelist: " + user[b]);
                         console.log("UserID: " + userID[b]);
 
@@ -1310,7 +1310,7 @@ else{
 
                         const data = 'report_and_ban_user=' + userID[b];
 
-                        whiteBanIDS.push(userID[b]); 
+
 
                         $.ajax({
                             type: 'POST',
@@ -1318,32 +1318,32 @@ else{
                             data: data
                         });
 
-                       
+                        user = [];
+                        userID = [];
 
 
                     }
                 }
 
+              }
+              else{
+                  clearInterval(whiteInterval);
+              }
+            }, whiteInterval1);
+            }, whiteInterval2);
 
 
 
-            },whiteInterval1);
 
-            if (bool3 === 0) {
-                console.log("Whitelist stopped.")
-                clearInterval(myInter5);
-            }
+            /////////////////////////////////
 
-        }, whiteInterval2);
 
-        if (bool3 === 0) {
+
+
+
+
         }
 
-
-        }
-          else{
-            alert("Your whitelist is empty! Make sure to add other users AND YOUR OWN USERNAME to the whitelist as well!")
-          }
     }, false);
 
     //Mute lagless
